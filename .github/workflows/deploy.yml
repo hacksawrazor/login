@@ -1,0 +1,19 @@
+name: Deploy Login Page
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    uses: hacksawrazor/ci-cd/.github/workflows/deploy-react.yml@main
+    with:
+      node-version: '20'
+      build-command: 'npm run build'
+      build-dir: 'dist'
+      deploy-path: '/var/www/html/hacksaw/login'
+    secrets:
+      SSH_HOST: ${{ secrets.SERVER_HOST_OCI }}
+      SSH_USER: ${{ secrets.SERVER_USER_OCI }}
+      SSH_KEY: ${{ secrets.SERVER_SSH_KEY_OCI }}
